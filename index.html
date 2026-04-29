@@ -2,10 +2,12 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DerivPro - Professional Trading Platform</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>DerivPro Ultimate - Professional Trading Platform</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <meta name="theme-color" content="#0a0e27">
+    <link rel="manifest" href="manifest.json">
 </head>
 <body>
     <nav class="navbar">
@@ -13,67 +15,218 @@
             <div class="logo">
                 <span class="logo-icon">📈</span>
                 <span class="logo-text">Deriv<span class="logo-highlight">Pro</span></span>
+                <span class="beta-badge">ULTIMATE</span>
             </div>
             <div class="nav-links">
                 <a href="#features">Features</a>
-                <a href="#about">About</a>
+                <a href="#indicators">Indicators</a>
+                <a href="#backtesting">Backtesting</a>
+                <a href="#social">Social Trading</a>
                 <a href="login.html" class="nav-login">Login</a>
                 <a href="login.html" class="btn-primary">Get Started</a>
             </div>
+            <button class="mobile-menu-btn" id="mobileMenuBtn">☰</button>
         </div>
     </nav>
 
     <section class="hero">
         <div class="hero-container">
+            <div class="hero-badge">
+                <span>⚡ Professional Trading Platform</span>
+            </div>
             <h1 class="hero-title">
-                Trade Smartly with 
-                <span class="gradient-text">DerivPro</span>
+                Trade Smarter with 
+                <span class="gradient-text">AI-Powered Analytics</span>
             </h1>
             <p class="hero-subtitle">
-                Professional trading platform with real-time market data, 
-                advanced analytics, and seamless Deriv integration
+                Professional trading platform with real-time market data, advanced technical indicators, 
+                backtesting engine, social trading, and seamless Deriv integration
             </p>
             <div class="hero-buttons">
-                <a href="login.html" class="btn-hero-primary">Start Trading →</a>
-                <a href="#features" class="btn-hero-secondary">Learn More</a>
+                <a href="login.html" class="btn-hero-primary">Start Trading Free →</a>
+                <a href="#features" class="btn-hero-secondary">Watch Demo</a>
+            </div>
+            <div class="hero-stats">
+                <div class="hero-stat">
+                    <span class="stat-number">50+</span>
+                    <span class="stat-label">Indicators</span>
+                </div>
+                <div class="hero-stat">
+                    <span class="stat-number">10K+</span>
+                    <span class="stat-label">Active Traders</span>
+                </div>
+                <div class="hero-stat">
+                    <span class="stat-number">99.9%</span>
+                    <span class="stat-label">Uptime</span>
+                </div>
             </div>
         </div>
     </section>
 
     <section id="features" class="features">
         <div class="container">
-            <h2 class="section-title">Powerful Features</h2>
-            <p class="section-subtitle">Everything you need for successful trading</p>
+            <h2 class="section-title">Everything You Need to Succeed</h2>
+            <p class="section-subtitle">Professional tools for serious traders</p>
             <div class="features-grid">
                 <div class="feature-card">
-                    <div class="feature-icon">⚡</div>
-                    <h3>Real-Time Data</h3>
-                    <p>Live price feeds with sub-second updates from Deriv's WebSocket API</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">🔒</div>
-                    <h3>Secure Authentication</h3>
-                    <p>OAuth 2.0 integration with Deriv for maximum security</p>
-                </div>
-                <div class="feature-card">
                     <div class="feature-icon">📊</div>
-                    <h3>Advanced Charts</h3>
-                    <p>Interactive candlestick charts with multiple timeframes</p>
+                    <h3>Candlestick Charts</h3>
+                    <p>Interactive TradingView charts with 50+ indicators and 12 timeframes</p>
                 </div>
                 <div class="feature-card">
                     <div class="feature-icon">🎯</div>
-                    <h3>One-Click Trading</h3>
-                    <p>Place trades instantly with predefined strategies</p>
+                    <h3>Stop Loss & TP</h3>
+                    <p>Automated risk management with customizable stop loss and take profit</p>
                 </div>
                 <div class="feature-card">
-                    <div class="feature-icon">📱</div>
-                    <h3>Responsive Design</h3>
-                    <p>Trade seamlessly on desktop, tablet, or mobile</p>
+                    <div class="feature-icon">📧</div>
+                    <h3>Email & SMS Alerts</h3>
+                    <p>Real-time price alerts delivered to your phone or email</p>
                 </div>
                 <div class="feature-card">
                     <div class="feature-icon">📈</div>
-                    <h3>Portfolio Analytics</h3>
-                    <p>Track performance with detailed metrics and reports</p>
+                    <h3>Backtesting Engine</h3>
+                    <p>Test your strategies on historical data before going live</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">👥</div>
+                    <h3>Social Trading</h3>
+                    <p>Copy top traders and share your strategies with the community</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🤖</div>
+                    <h3>AI Signals</h3>
+                    <p>Machine learning powered buy/sell signals with 75%+ accuracy</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📱</div>
+                    <h3>Mobile App</h3>
+                    <p>Fully responsive design that works on any device</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔗</div>
+                    <h3>Copy Trading</h3>
+                    <p>Automatically mirror successful traders' positions</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="indicators" class="indicators-section">
+        <div class="container">
+            <h2 class="section-title">50+ Technical Indicators</h2>
+            <p class="section-subtitle">Professional-grade analysis tools</p>
+            <div class="indicators-grid">
+                <div class="indicator-category">
+                    <h3>Trend Indicators</h3>
+                    <ul>
+                        <li>Moving Average (SMA/EMA)</li>
+                        <li>Bollinger Bands</li>
+                        <li>Parabolic SAR</li>
+                        <li>Ichimoku Cloud</li>
+                        <li>MACD</li>
+                    </ul>
+                </div>
+                <div class="indicator-category">
+                    <h3>Momentum Indicators</h3>
+                    <ul>
+                        <li>RSI</li>
+                        <li>Stochastic</li>
+                        <li>Williams %R</li>
+                        <li>CCI</li>
+                        <li>Awesome Oscillator</li>
+                    </ul>
+                </div>
+                <div class="indicator-category">
+                    <h3>Volume Indicators</h3>
+                    <ul>
+                        <li>Volume Profile</li>
+                        <li>OBV</li>
+                        <li>Accumulation/Distribution</li>
+                        <li>Money Flow Index</li>
+                        <li>Chaikin Oscillator</li>
+                    </ul>
+                </div>
+                <div class="indicator-category">
+                    <h3>Custom Indicators</h3>
+                    <ul>
+                        <li>SuperTrend</li>
+                        <li>Keltner Channels</li>
+                        <li>Fibonacci Retracement</li>
+                        <li>Pivot Points</li>
+                        <li>Market Profile</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="backtesting" class="backtesting-section">
+        <div class="container">
+            <h2 class="section-title">Powerful Backtesting Engine</h2>
+            <p class="section-subtitle">Test your strategies on 10+ years of historical data</p>
+            <div class="backtesting-showcase">
+                <div class="backtesting-features">
+                    <div class="backtest-feature">
+                        <span>📅</span>
+                        <div>
+                            <h4>Historical Data</h4>
+                            <p>Access 10+ years of tick data</p>
+                        </div>
+                    </div>
+                    <div class="backtest-feature">
+                        <span>⚙️</span>
+                        <div>
+                            <h4>Custom Strategies</h4>
+                            <p>Build and test your own strategies</p>
+                        </div>
+                    </div>
+                    <div class="backtest-feature">
+                        <span>📊</span>
+                        <div>
+                            <h4>Performance Metrics</h4>
+                            <p>Sharpe ratio, max drawdown, win rate</p>
+                        </div>
+                    </div>
+                    <div class="backtest-feature">
+                        <span>🚀</span>
+                        <div>
+                            <h4>Optimization</h4>
+                            <p>AI-powered parameter optimization</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="backtesting-preview">
+                    <img src="https://via.placeholder.com/400x300?text=Backtesting+Results+Preview" alt="Backtesting Preview">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="social" class="social-section">
+        <div class="container">
+            <h2 class="section-title">Social Trading Community</h2>
+            <p class="section-subtitle">Learn, share, and grow together</p>
+            <div class="social-features">
+                <div class="social-card">
+                    <div class="social-icon">👥</div>
+                    <h3>Copy Trading</h3>
+                    <p>Automatically copy top-performing traders</p>
+                </div>
+                <div class="social-card">
+                    <div class="social-icon">💬</div>
+                    <h3>Live Chat</h3>
+                    <p>Real-time chat with other traders</p>
+                </div>
+                <div class="social-card">
+                    <div class="social-icon">🏆</div>
+                    <h3>Leaderboards</h3>
+                    <p>Compete and rank against others</p>
+                </div>
+                <div class="social-card">
+                    <div class="social-icon">📚</div>
+                    <h3>Strategy Sharing</h3>
+                    <p>Share your strategies and signals</p>
                 </div>
             </div>
         </div>
@@ -81,8 +234,34 @@
 
     <footer class="footer">
         <div class="container">
-            <p>&copy; 2026 DerivPro. Professional trading platform integrated with Deriv.</p>
-            <p class="disclaimer">Risk warning: Trading involves substantial risk of loss</p>
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="logo">📈 DerivPro Ultimate</div>
+                    <p>Professional trading platform integrated with Deriv</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <a href="#features">Features</a>
+                    <a href="#indicators">Indicators</a>
+                    <a href="#backtesting">Backtesting</a>
+                </div>
+                <div class="footer-section">
+                    <h4 support">Support</h4>
+                    <a href="#">Documentation</a>
+                    <a href="#">API Reference</a>
+                    <a href="#">Contact</a>
+                </div>
+                <div class="footer-section">
+                    <h4>Legal</h4>
+                    <a href="#">Terms of Service</a>
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Risk Disclosure</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 DerivPro Ultimate. All rights reserved.</p>
+                <p class="disclaimer">Risk warning: Trading involves substantial risk of loss. Trade responsibly.</p>
+            </div>
         </div>
     </footer>
 
