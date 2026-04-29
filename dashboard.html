@@ -2,21 +2,26 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard - DerivPro Trading</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Dashboard - DerivPro Ultimate</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="dashboard.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Chart.js for analytics -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <!-- TradingView Lightweight Charts -->
+    <script src="https://unpkg.com/lightweight-charts/dist/lightweight-charts.standalone.production.js"></script>
 </head>
 <body>
     <div class="app-container">
         <!-- Sidebar -->
-        <aside class="sidebar">
+        <aside class="sidebar" id="sidebar">
             <div class="sidebar-header">
                 <div class="logo">
                     <span class="logo-icon">📈</span>
                     <span class="logo-text">Deriv<span class="logo-highlight">Pro</span></span>
                 </div>
+                <button class="close-sidebar" id="closeSidebar">×</button>
             </div>
             
             <nav class="sidebar-nav">
@@ -28,12 +33,24 @@
                     <span class="nav-icon">🎯</span>
                     <span>Trading</span>
                 </a>
+                <a href="#" class="nav-item" data-view="charts">
+                    <span class="nav-icon">📈</span>
+                    <span>Advanced Charts</span>
+                </a>
                 <a href="#" class="nav-item" data-view="portfolio">
                     <span class="nav-icon">💼</span>
                     <span>Portfolio</span>
                 </a>
+                <a href="#" class="nav-item" data-view="backtesting">
+                    <span class="nav-icon">🔄</span>
+                    <span>Backtesting</span>
+                </a>
+                <a href="#" class="nav-item" data-view="social">
+                    <span class="nav-icon">👥</span>
+                    <span>Social Trading</span>
+                </a>
                 <a href="#" class="nav-item" data-view="analytics">
-                    <span class="nav-icon">📈</span>
+                    <span class="nav-icon">📉</span>
                     <span>Analytics</span>
                 </a>
                 <a href="#" class="nav-item" data-view="settings">
@@ -58,6 +75,7 @@
         <main class="main-content">
             <!-- Top Bar -->
             <div class="top-bar">
+                <button class="mobile-menu-toggle" id="mobileMenuToggle">☰</button>
                 <div class="connection-status">
                     <span class="status-dot" id="statusDot"></span>
                     <span id="connectionText">Connecting...</span>
@@ -76,7 +94,6 @@
                     <p>Welcome back! Here's your trading overview</p>
                 </div>
 
-                <!-- Stats Grid -->
                 <div class="stats-grid">
                     <div class="stat-card">
                         <div class="stat-icon">💰</div>
@@ -108,16 +125,15 @@
                     </div>
                 </div>
 
-                <!-- Recent Trades -->
                 <div class="recent-trades">
                     <h3>Recent Trades</h3>
                     <div class="trades-table-container">
                         <table class="trades-table" id="recentTradesTable">
                             <thead>
-                                <tr><th>Time</th><th>Symbol</th><th>Type</th><th>Amount</th><th>Status</th></tr>
+                                <tr><th>Time</th><th>Symbol</th><th>Type</th><th>Amount</th><th>Profit</th><th>Status</th></tr>
                             </thead>
                             <tbody id="recentTradesBody">
-                                <tr><td colspan="5" class="empty-state">No trades yet</td></tr>
+                                <tr><td colspan="6" class="empty-state">No trades yet</td></tr>
                             </tbody>
                         </table>
                     </div>
@@ -127,12 +143,11 @@
             <!-- Trading View -->
             <div id="tradingView" class="view">
                 <div class="view-header">
-                    <h1>Place Trade</h1>
-                    <p>Execute trades instantly</p>
+                    <h1>Trade Execution</h1>
+                    <p>Execute trades with advanced risk management</p>
                 </div>
 
                 <div class="trading-grid">
-                    <!-- Market Data Panel -->
                     <div class="market-panel">
                         <h3>Market Data</h3>
                         <div class="symbol-selector">
@@ -142,6 +157,7 @@
                                 <option value="R_50">Volatility 50 Index</option>
                                 <option value="R_75">Volatility 75 Index</option>
                                 <option value="R_100">Volatility 100 Index</option>
+                                <option value="1HZ10V">1HZ10V Index</option>
                             </select>
                         </div>
                         <div class="current-price-display">
@@ -154,13 +170,16 @@
                                 <strong id="spread">0.00</strong>
                             </div>
                             <div class="market-stat">
+                                <span>24h Change</span>
+                                <strong id="dailyChange">0%</strong>
+                            </div>
+                            <div class="market-stat">
                                 <span>Last Update</span>
                                 <strong id="lastUpdate">-</strong>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Trade Execution Panel -->
                     <div class="trade-panel">
                         <h3>Trade Execution</h3>
                         <div class="trade-type-selector">
@@ -182,19 +201,66 @@
                                 <input type="number" id="tradeDuration" value="5" min="1" max="60">
                             </div>
                         </div>
+
+                        <!-- Risk Management -->
+                        <div class="risk-controls">
+                            <h4>🎯 Risk Management</h4>
+                            <div class="risk-inputs">
+                                <div class="input-field">
+                                    <label>Stop Loss (%)</label>
+                                    <input type="number" id="stopLossInput" step="0.5" value="2" min="0" max="100">
+                                </div>
+                                <div class="input-field">
+                                    <label>Take Profit (%)</label>
+                                    <input type="number" id="takeProfitInput" step="0.5" value="5" min="0" max="100">
+                                </div>
+                            </div>
+                            <div class="daily-loss-display">
+                                <span>📉 Daily Loss: </span>
+                                <strong id="dailyLossValue">0%</strong>
+                                <span class="daily-loss-limit">(Limit: <span id="dailyLossLimit">10</span>%)</span>
+                            </div>
+                        </div>
                         
                         <button id="executeTradeBtn" class="execute-btn">Execute Trade</button>
                         <div id="tradeResult" class="trade-result"></div>
                     </div>
                 </div>
 
-                <!-- Active Positions -->
                 <div class="active-positions">
                     <h3>Active Positions</h3>
                     <div id="activePositionsList" class="positions-list">
                         <p class="empty-state">No active positions</p>
                     </div>
                 </div>
+            </div>
+
+            <!-- Advanced Charts View -->
+            <div id="chartsView" class="view">
+                <div class="view-header">
+                    <h1>Advanced Charts</h1>
+                    <p>Professional candlestick charts with 50+ indicators</p>
+                </div>
+                
+                <div class="chart-toolbar">
+                    <div class="timeframe-selector" id="timeframe-buttons"></div>
+                    <div class="indicator-selector">
+                        <select id="indicatorSelect">
+                            <option value="">Add Indicator</option>
+                            <option value="sma">Simple Moving Average (SMA)</option>
+                            <option value="ema">Exponential Moving Average (EMA)</option>
+                            <option value="bollinger">Bollinger Bands</option>
+                            <option value="rsi">RSI</option>
+                            <option value="macd">MACD</option>
+                            <option value="ichimoku">Ichimoku Cloud</option>
+                        </select>
+                        <button id="addIndicatorBtn">+ Add</button>
+                    </div>
+                </div>
+                
+                <div id="candlestick-chart" class="candlestick-chart"></div>
+                
+                <div class="active-indicators" id="activeIndicators"></div>
             </div>
 
             <!-- Portfolio View -->
@@ -208,43 +274,211 @@
                 </div>
             </div>
 
+            <!-- Backtesting View -->
+            <div id="backtestingView" class="view">
+                <div class="view-header">
+                    <h1>Backtesting Engine</h1>
+                    <p>Test your strategies on historical data</p>
+                </div>
+                
+                <div class="backtesting-panel">
+                    <div class="backtest-config">
+                        <h3>Strategy Configuration</h3>
+                        <div class="backtest-inputs">
+                            <div class="input-field">
+                                <label>Symbol</label>
+                                <select id="backtestSymbol">
+                                    <option value="R_75">Volatility 75 Index</option>
+                                    <option value="R_100">Volatility 100 Index</option>
+                                </select>
+                            </div>
+                            <div class="input-field">
+                                <label>Start Date</label>
+                                <input type="date" id="backtestStart" value="2024-01-01">
+                            </div>
+                            <div class="input-field">
+                                <label>End Date</label>
+                                <input type="date" id="backtestEnd" value="2024-12-31">
+                            </div>
+                            <div class="input-field">
+                                <label>Initial Capital ($)</label>
+                                <input type="number" id="backtestCapital" value="1000">
+                            </div>
+                            <div class="input-field">
+                                <label>Strategy Type</label>
+                                <select id="backtestStrategy">
+                                    <option value="sma_cross">SMA Crossover</option>
+                                    <option value="rsi">RSI Strategy</option>
+                                    <option value="bollinger">Bollinger Bands</option>
+                                    <option value="custom">Custom Strategy</option>
+                                </select>
+                            </div>
+                            <div class="input-field">
+                                <label>Risk per Trade (%)</label>
+                                <input type="number" id="backtestRisk" value="2" step="0.5">
+                            </div>
+                        </div>
+                        <button id="runBacktestBtn" class="run-backtest-btn">🚀 Run Backtest</button>
+                    </div>
+                    
+                    <div class="backtest-results" id="backtestResults" style="display: none;">
+                        <h3>Backtest Results</h3>
+                        <div class="results-grid" id="resultsGrid"></div>
+                        <div id="backtestChart" class="backtest-chart"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Social Trading View -->
+            <div id="socialView" class="view">
+                <div class="view-header">
+                    <h1>Social Trading</h1>
+                    <p>Copy top traders and share strategies</p>
+                </div>
+                
+                <div class="social-tabs">
+                    <button class="social-tab active" data-social-tab="leaderboard">🏆 Leaderboard</button>
+                    <button class="social-tab" data-social-tab="copy-trading">👥 Copy Trading</button>
+                    <button class="social-tab" data-social-tab="signals">📡 Trading Signals</button>
+                    <button class="social-tab" data-social-tab="chat">💬 Live Chat</button>
+                </div>
+                
+                <div id="leaderboardView" class="social-view active">
+                    <div class="leaderboard-container">
+                        <div class="leaderboard-filters">
+                            <select id="leaderboardPeriod">
+                                <option value="weekly">Weekly</option>
+                                <option value="monthly">Monthly</option>
+                                <option value="alltime">All Time</option>
+                            </select>
+                        </div>
+                        <div id="leaderboardList" class="leaderboard-list">
+                            <p class="empty-state">Loading top traders...</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div id="copyTradingView" class="social-view">
+                    <div class="copy-trading-container">
+                        <h3>Copy Trading Settings</h3>
+                        <div class="copy-settings">
+                            <div class="input-field">
+                                <label>Max Copy Amount ($)</label>
+                                <input type="number" id="maxCopyAmount" value="100">
+                            </div>
+                            <div class="input-field">
+                                <label>Copy Multiplier</label>
+                                <input type="number" id="copyMultiplier" value="1" step="0.1">
+                            </div>
+                            <button id="saveCopySettings" class="save-copy-btn">Save Settings</button>
+                        </div>
+                        <div id="followingList" class="following-list"></div>
+                    </div>
+                </div>
+                
+                <div id="signalsView" class="social-view">
+                    <div class="signals-container">
+                        <div id="signalsList" class="signals-list"></div>
+                    </div>
+                </div>
+                
+                <div id="chatView" class="social-view">
+                    <div class="chat-container">
+                        <div id="chatMessages" class="chat-messages"></div>
+                        <div class="chat-input">
+                            <input type="text" id="chatInput" placeholder="Type your message...">
+                            <button id="sendChatBtn">Send</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <!-- Analytics View -->
             <div id="analyticsView" class="view">
                 <div class="view-header">
-                    <h1>Analytics</h1>
-                    <p>Advanced trading metrics</p>
+                    <h1>Advanced Analytics</h1>
+                    <p>Deep insights into your trading performance</p>
                 </div>
-                <div id="analyticsContent" class="analytics-content">
-                    <p class="empty-state">Loading analytics...</p>
-                </div>
+                <div id="analyticsContent" class="analytics-content"></div>
             </div>
 
             <!-- Settings View -->
             <div id="settingsView" class="view">
                 <div class="view-header">
                     <h1>Settings</h1>
-                    <p>Configure your trading preferences</p>
+                    <p>Customize your trading experience</p>
                 </div>
+                
                 <div class="settings-panel">
-                    <div class="setting-group">
-                        <label>Default Trade Amount</label>
-                        <input type="number" id="defaultAmount" value="10">
+                    <div class="setting-section">
+                        <h3>Trading Preferences</h3>
+                        <div class="setting-group">
+                            <label>Default Trade Amount ($)</label>
+                            <input type="number" id="defaultAmount" value="10">
+                        </div>
+                        <div class="setting-group">
+                            <label>Default Duration (minutes)</label>
+                            <input type="number" id="defaultDuration" value="5">
+                        </div>
                     </div>
-                    <div class="setting-group">
-                        <label>Default Duration (minutes)</label>
-                        <input type="number" id="defaultDuration" value="5">
+                    
+                    <div class="setting-section">
+                        <h3>Risk Limits</h3>
+                        <div class="setting-group">
+                            <label>Daily Loss Limit (%)</label>
+                            <input type="number" id="dailyLossLimitSetting" value="10" step="1">
+                        </div>
+                        <div class="setting-group">
+                            <label>Max Position Size ($)</label>
+                            <input type="number" id="maxPositionSize" value="500">
+                        </div>
                     </div>
-                    <div class="setting-group">
-                        <label>Sound Alerts</label>
-                        <input type="checkbox" id="soundAlerts" checked>
+                    
+                    <div class="setting-section">
+                        <h3>Notifications</h3>
+                        <div class="setting-group">
+                            <label>
+                                <input type="checkbox" id="soundAlerts" checked> Sound Alerts
+                            </label>
+                        </div>
+                        <div class="setting-group">
+                            <label>
+                                <input type="checkbox" id="priceAlerts" checked> Price Alerts
+                                </label>
+                        </div>
+                        <div class="setting-group">
+                            <label>
+                                <input type="checkbox" id="tradeConfirmations" checked> Trade Confirmations
+                            </label>
+                        </div>
                     </div>
-                    <button id="saveSettingsBtn" class="save-btn">Save Settings</button>
+                    
+                    <div class="setting-section">
+                        <h3>Appearance</h3>
+                        <div class="setting-group">
+                            <label>Theme</label>
+                            <select id="themeSelect">
+                                <option value="dark">Dark (Default)</option>
+                                <option value="light">Light</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <button id="saveAllSettingsBtn" class="save-all-btn">Save All Settings</button>
                 </div>
             </div>
         </main>
     </div>
 
+    <!-- Scripts -->
     <script src="config.js"></script>
+    <script src="indicators.js"></script>
+    <script src="backtesting.js"></script>
+    <script src="social-trading.js"></script>
+    <script src="charts.js"></script>
+    <script src="risk-manager.js"></script>
+    <script src="alerts.js"></script>
+    <script src="analytics.js"></script>
     <script src="trading.js"></script>
     <script src="script.js"></script>
 </body>
