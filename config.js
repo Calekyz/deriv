@@ -1,14 +1,11 @@
 // ============================================
-// 🔑 PUT YOUR APP ID HERE
+// 🔑 DERIV APP CONFIGURATION
 // ============================================
-// Get your App ID from: developers.deriv.com
-// Default demo App ID is 16929 (for testing only)
-// Replace with your own App ID for production
 
-const APP_ID = "16929";  // <--- REPLACE THIS WITH YOUR APP ID
+const APP_ID = "3301r2nWfUV4FzUj536sd";
 
 // For demo trading (recommended to start)
-const USE_DEMO = true;    // true = demo account, false = real account
+const USE_DEMO = true;
 
 // WebSocket endpoint
 const WS_URL = `wss://ws.derivws.com/websockets/v3?app_id=${APP_ID}`;
