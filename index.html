@@ -3,88 +3,89 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Deriv Trading Platform</title>
+    <title>DerivPro - Professional Trading Platform</title>
     <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div class="container">
-        <!-- Header -->
-        <header>
-            <h1>📈 Deriv Trading Platform</h1>
-            <div class="connection-status" id="connectionStatus">
-                ⚫ Disconnected
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <span class="logo-icon">📈</span>
+                <span class="logo-text">Deriv<span class="logo-highlight">Pro</span></span>
             </div>
-        </header>
-
-        <!-- Dashboard -->
-        <div class="dashboard">
-            <!-- Account Info -->
-            <div class="card account-card">
-                <h3>Account Balance</h3>
-                <div class="balance" id="balance">$0.00</div>
-                <div class="account-id" id="accountId">Not logged in</div>
-                <div class="currency" id="currency">USD</div>
-            </div>
-
-            <!-- Market Data -->
-            <div class="card market-card">
-                <h3>Market Data</h3>
-                <div class="symbol-selector">
-                    <label for="symbol">Symbol:</label>
-                    <select id="symbol">
-                        <option value="R_10">Volatility 10 Index</option>
-                        <option value="R_25">Volatility 25 Index</option>
-                        <option value="R_50">Volatility 50 Index</option>
-                        <option value="R_75">Volatility 75 Index</option>
-                        <option value="R_100">Volatility 100 Index</option>
-                        <option value="1HZ10V">1HZ10V Index</option>
-                    </select>
-                </div>
-                <div class="current-price" id="currentPrice">Loading...</div>
-                <div class="last-updated" id="lastUpdated">-</div>
-            </div>
-
-            <!-- Trading Form -->
-            <div class="card trade-card">
-                <h3>Place Trade</h3>
-                <div class="form-group">
-                    <label for="tradeType">Trade Type:</label>
-                    <select id="tradeType">
-                        <option value="CALL">📈 Call (Price Up)</option>
-                        <option value="PUT">📉 Put (Price Down)</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="amount">Amount ($):</label>
-                    <input type="number" id="amount" value="10" min="1" step="1">
-                </div>
-                <div class="form-group">
-                    <label for="duration">Duration (minutes):</label>
-                    <input type="number" id="duration" value="5" min="1" max="60">
-                </div>
-                <button id="tradeButton" class="trade-btn">🚀 Place Trade</button>
-                <div id="tradeMessage" class="trade-message"></div>
-            </div>
-
-            <!-- Active Trades -->
-            <div class="card trades-card">
-                <h3>Active Trades</h3>
-                <div id="activeTradesList">
-                    <p class="empty-message">No active trades</p>
-                </div>
-            </div>
-
-            <!-- Connection Controls -->
-            <div class="card connection-card">
-                <h3>Connection</h3>
-                <button id="connectButton" class="connect-btn">🔌 Connect to Deriv</button>
-                <button id="disconnectButton" class="disconnect-btn">❌ Disconnect</button>
-                <p class="info-text">Make sure you have a Deriv account with demo money</p>
+            <div class="nav-links">
+                <a href="#features">Features</a>
+                <a href="#about">About</a>
+                <a href="login.html" class="nav-login">Login</a>
+                <a href="login.html" class="btn-primary">Get Started</a>
             </div>
         </div>
-    </div>
+    </nav>
+
+    <section class="hero">
+        <div class="hero-container">
+            <h1 class="hero-title">
+                Trade Smartly with 
+                <span class="gradient-text">DerivPro</span>
+            </h1>
+            <p class="hero-subtitle">
+                Professional trading platform with real-time market data, 
+                advanced analytics, and seamless Deriv integration
+            </p>
+            <div class="hero-buttons">
+                <a href="login.html" class="btn-hero-primary">Start Trading →</a>
+                <a href="#features" class="btn-hero-secondary">Learn More</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="features" class="features">
+        <div class="container">
+            <h2 class="section-title">Powerful Features</h2>
+            <p class="section-subtitle">Everything you need for successful trading</p>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">⚡</div>
+                    <h3>Real-Time Data</h3>
+                    <p>Live price feeds with sub-second updates from Deriv's WebSocket API</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔒</div>
+                    <h3>Secure Authentication</h3>
+                    <p>OAuth 2.0 integration with Deriv for maximum security</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📊</div>
+                    <h3>Advanced Charts</h3>
+                    <p>Interactive candlestick charts with multiple timeframes</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🎯</div>
+                    <h3>One-Click Trading</h3>
+                    <p>Place trades instantly with predefined strategies</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📱</div>
+                    <h3>Responsive Design</h3>
+                    <p>Trade seamlessly on desktop, tablet, or mobile</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📈</div>
+                    <h3>Portfolio Analytics</h3>
+                    <p>Track performance with detailed metrics and reports</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2026 DerivPro. Professional trading platform integrated with Deriv.</p>
+            <p class="disclaimer">Risk warning: Trading involves substantial risk of loss</p>
+        </div>
+    </footer>
 
     <script src="config.js"></script>
-    <script src="script.js"></script>
 </body>
 </html>
