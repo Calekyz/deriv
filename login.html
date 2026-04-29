@@ -17,9 +17,20 @@
                     <span class="beta-badge">ULTIMATE</span>
                 </div>
                 <h2>Welcome Back</h2>
-                <p>Login to access your trading dashboard</p>
+                <p>Choose your login method</p>
             </div>
 
+            <!-- OAuth Button -->
+            <button id="oauthLoginBtn" class="btn-oauth">
+                <span class="btn-icon">🔐</span>
+                Sign in with Deriv Account
+            </button>
+
+            <div class="divider">
+                <span>or continue with API token</span>
+            </div>
+
+            <!-- PAT Token Form -->
             <form id="loginForm" class="auth-form">
                 <div class="input-group">
                     <label for="apiToken">Deriv API Token</label>
@@ -35,13 +46,7 @@
                     </select>
                 </div>
 
-                <div class="input-group">
-                    <label for="rememberMe">
-                        <input type="checkbox" id="rememberMe"> Remember me
-                    </label>
-                </div>
-
-                <button type="submit" class="btn-auth">Connect to Deriv →</button>
+                <button type="submit" class="btn-auth">Connect with API Token →</button>
             </form>
 
             <div class="auth-footer">
@@ -51,15 +56,16 @@
         </div>
 
         <div class="auth-info">
-            <h3>🔒 Secure Connection</h3>
-            <p>✓ Your API token is encrypted locally</p>
+            <h3>🔒 Two Ways to Connect</h3>
+            <p><strong>OAuth Login:</strong> Sign in with your Deriv username/password - no token needed</p>
+            <p><strong>API Token:</strong> Manual token entry for advanced users</p>
             <p>✓ Direct connection to Deriv servers</p>
             <p>✓ We never store your credentials</p>
-            <p>✓ OAuth 2.0 compliant</p>
             <p>✓ 256-bit SSL encryption</p>
         </div>
     </div>
 
+    <script src="https://unpkg.com/@deriv-com/auth-client@1.5.8/dist/index.umd.js"></script>
     <script src="config.js"></script>
     <script src="auth.js"></script>
 </body>
