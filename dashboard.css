@@ -400,4 +400,131 @@
     color: #fff;
     padding: 1rem;
     border: none;
-    border-radius:
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.3s;
+}
+
+.execute-btn:hover {
+    transform: translateY(-2px);
+}
+
+.trade-result {
+    margin-top: 1rem;
+    padding: 0.8rem;
+    border-radius: 8px;
+    display: none;
+}
+
+.trade-result.success {
+    display: block;
+    background: rgba(16, 185, 129, 0.2);
+    border: 1px solid #10b981;
+    color: #10b981;
+}
+
+.trade-result.error {
+    display: block;
+    background: rgba(239, 68, 68, 0.2);
+    border: 1px solid #ef4444;
+    color: #ef4444;
+}
+
+/* Active Positions */
+.active-positions {
+    background: rgba(15, 19, 46, 0.8);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
+    padding: 1.5rem;
+}
+
+.active-positions h3 {
+    margin-bottom: 1rem;
+}
+
+.positions-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+}
+
+.position-item {
+    background: rgba(0, 0, 0, 0.3);
+    padding: 1rem;
+    border-radius: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-left: 4px solid;
+}
+
+.position-item.call {
+    border-left-color: #10b981;
+}
+
+.position-item.put {
+    border-left-color: #ef4444;
+}
+
+/* Settings */
+.settings-panel {
+    background: rgba(15, 19, 46, 0.8);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
+    padding: 1.5rem;
+    max-width: 500px;
+}
+
+.setting-group {
+    margin-bottom: 1.5rem;
+}
+
+.setting-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: #a0aec0;
+}
+
+.setting-group input[type="number"] {
+    width: 100%;
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 0.6rem;
+    border-radius: 8px;
+    color: #fff;
+}
+
+.save-btn {
+    background: #6366f1;
+    color: #fff;
+    padding: 0.8rem 1.5rem;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .sidebar {
+        transform: translateX(-100%);
+        transition: transform 0.3s;
+        z-index: 1000;
+    }
+    
+    .sidebar.open {
+        transform: translateX(0);
+    }
+    
+    .main-content {
+        margin-left: 0;
+    }
+    
+    .trading-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .stats-grid {
+        grid-template-columns: 1fr;
+    }
+}
