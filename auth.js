@@ -4,6 +4,15 @@ class AuthManager {
         this.apiToken = null;
         this.accountType = null;
         this.isAuthenticated = false;
+        
+        // Check if demo mode is enabled
+        if (typeof DEMO_MODE !== 'undefined' && DEMO_MODE === true) {
+            console.log('🔧 DEMO MODE ENABLED - Showing UI with simulated data');
+            this.demoMode = true;
+            this.skipToDashboard();
+            return;
+        }
+        
         this.init();
     }
     
@@ -20,6 +29,30 @@ class AuthManager {
         }
         
         this.setupEventListeners();
+        this.setupOAuthLogin();
+    }
+    
+    setupOAuthLogin() {
+        const oauthBtn = document.getElementById('oauthLoginBtn');
+        if (oauthBtn && typeof DerivAuth !== 'undefined') {
+            oauthBtn.addEventListener('click', async () => {
+                try {
+                    await DerivAuth.requestOidcAuthentication({
+                        redirectCallbackUri: `${window.location.origin}/callback.html`,
+                        clientId: 'YOUR_CLIENT_ID',  // Replace with your OAuth client ID
+                    });
+                } catch (error) {
+                    this.showError('OAuth login failed: ' + error.message);
+                }
+            });
+        }
+    }
+    
+    skipToDashboard() {
+        // Skip login and go straight to dashboard with demo data
+        localStorage.setItem('demo_mode', 'true');
+        localStorage.setItem('demo_balance', '10000');
+        window.location.href = 'dashboard.html';
     }
     
     setupEventListeners() {
@@ -47,13 +80,12 @@ class AuthManager {
         
         this.showLoading('Connecting to Deriv...');
         
-        // Test connection to Deriv
         const isValid = await this.testDerivConnection(apiToken);
         
         if (isValid) {
-            // Save credentials
             localStorage.setItem('deriv_api_token', apiToken);
             localStorage.setItem('deriv_account_type', accountType);
+            localStorage.removeItem('demo_mode');
             
             this.showSuccess('Connected successfully! Redirecting...');
             
@@ -109,28 +141,28 @@ class AuthManager {
     
     showLoading(message) {
         const btn = document.querySelector('.btn-auth');
-        btn.textContent = message;
-        btn.disabled = true;
+        if (btn) {
+            btn.textContent = message;
+            btn.disabled = true;
+        }
     }
     
     showError(message) {
         const btn = document.querySelector('.btn-auth');
-        btn.textContent = 'Connect to Deriv →';
-        btn.disabled = false;
+        if (btn) {
+            btn.textContent = 'Connect with API Token →';
+            btn.disabled = false;
+        }
         
         const errorDiv = document.createElement('div');
         errorDiv.className = 'error-message';
         errorDiv.textContent = message;
-        errorDiv.style.color = '#ef4444';
-        errorDiv.style.marginTop = '1rem';
-        errorDiv.style.padding = '0.8rem';
-        errorDiv.style.background = 'rgba(239, 68, 68, 0.1)';
-        errorDiv.style.borderRadius = '8px';
+        errorDiv.style.cssText = 'color:#ef4444;margin-top:1rem;padding:0.8rem;background:rgba(239,68,68,0.1);border-radius:8px';
         
         const form = document.querySelector('.auth-form');
-        const existingError = form.querySelector('.error-message');
+        const existingError = form?.querySelector('.error-message');
         if (existingError) existingError.remove();
-        form.appendChild(errorDiv);
+        if (form) form.appendChild(errorDiv);
         
         setTimeout(() => errorDiv.remove(), 5000);
     }
@@ -139,18 +171,14 @@ class AuthManager {
         const successDiv = document.createElement('div');
         successDiv.className = 'success-message';
         successDiv.textContent = message;
-        successDiv.style.color = '#10b981';
-        successDiv.style.marginTop = '1rem';
-        successDiv.style.padding = '0.8rem';
-        successDiv.style.background = 'rgba(16, 185, 129, 0.1)';
-        successDiv.style.borderRadius = '8px';
+        successDiv.style.cssText = 'color:#10b981;margin-top:1rem;padding:0.8rem;background:rgba(16,185,129,0.1);border-radius:8px';
         
         const form = document.querySelector('.auth-form');
-        form.appendChild(successDiv);
+        if (form) form.appendChild(successDiv);
     }
 }
 
 // Initialize auth on login page
 if (window.location.pathname.includes('login.html')) {
-    new AuthManager();
+    window.authManager = new AuthManager();
 }
