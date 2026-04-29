@@ -2,10 +2,126 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
     <title>Login - DerivPro Ultimate</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        /* Additional styles for demo button */
+        .demo-section {
+            margin-top: 1.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: center;
+        }
+        
+        .btn-demo {
+            width: 100%;
+            background: linear-gradient(135deg, #f59e0b, #d97706);
+            color: #fff;
+            padding: 1rem;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            transition: transform 0.3s, box-shadow 0.3s;
+            font-size: 1rem;
+        }
+        
+        .btn-demo:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(245, 158, 11, 0.4);
+        }
+        
+        .demo-info {
+            background: rgba(245, 158, 11, 0.1);
+            border: 1px solid rgba(245, 158, 11, 0.3);
+            border-radius: 12px;
+            padding: 1rem;
+            margin-top: 1rem;
+            text-align: left;
+        }
+        
+        .demo-info p {
+            margin: 0.5rem 0;
+            font-size: 0.85rem;
+            color: #fbbf24;
+        }
+        
+        .demo-info .check {
+            color: #10b981;
+            margin-right: 0.5rem;
+        }
+        
+        .btn-oauth {
+            width: 100%;
+            background: linear-gradient(135deg, #10b981, #059669);
+            color: #fff;
+            padding: 1rem;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+            transition: transform 0.3s;
+            font-size: 1rem;
+        }
+        
+        .btn-oauth:hover {
+            transform: translateY(-2px);
+        }
+        
+        .btn-icon {
+            font-size: 1.2rem;
+        }
+        
+        .divider {
+            text-align: center;
+            margin: 1.5rem 0;
+            position: relative;
+        }
+        
+        .divider::before,
+        .divider::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            width: calc(50% - 50px);
+            height: 1px;
+            background: rgba(255, 255, 255, 0.1);
+        }
+        
+        .divider::before { left: 0; }
+        .divider::after { right: 0; }
+        
+        .divider span {
+            background: transparent;
+            padding: 0 1rem;
+            color: #a0aec0;
+            font-size: 0.8rem;
+        }
+        
+        .back-link {
+            display: block;
+            text-align: center;
+            margin-top: 1rem;
+            color: #a0aec0;
+            text-decoration: none;
+            font-size: 0.85rem;
+        }
+        
+        .back-link:hover {
+            color: #6366f1;
+        }
+    </style>
 </head>
 <body class="auth-page">
     <div class="auth-container">
@@ -16,8 +132,26 @@
                     <span class="logo-text">Deriv<span class="logo-highlight">Pro</span></span>
                     <span class="beta-badge">ULTIMATE</span>
                 </div>
-                <h2>Welcome Back</h2>
-                <p>Choose your login method</p>
+                <h2>Welcome to DerivPro</h2>
+                <p>The ultimate professional trading platform</p>
+            </div>
+
+            <!-- Demo Button -->
+            <div class="demo-section">
+                <button id="demoModeBtn" class="btn-demo">
+                    <span class="btn-icon">🔧</span>
+                    Try Demo Mode (No Login Required)
+                </button>
+                <div class="demo-info">
+                    <p><span class="check">✓</span> Explore the full platform instantly</p>
+                    <p><span class="check">✓</span> Simulated trading with $10,000 virtual balance</p>
+                    <p><span class="check">✓</span> Test all features: charts, backtesting, social trading</p>
+                    <p><span class="check">✓</span> No signup, no API token needed</p>
+                </div>
+            </div>
+
+            <div class="divider">
+                <span>or login with your Deriv account</span>
             </div>
 
             <!-- OAuth Button -->
@@ -25,10 +159,6 @@
                 <span class="btn-icon">🔐</span>
                 Sign in with Deriv Account
             </button>
-
-            <div class="divider">
-                <span>or continue with API token</span>
-            </div>
 
             <!-- PAT Token Form -->
             <form id="loginForm" class="auth-form">
@@ -53,12 +183,15 @@
                 <p>Don't have a Deriv account? <a href="https://deriv.com" target="_blank">Sign up here</a></p>
                 <button id="testConnectionBtn" class="btn-test">Test Connection</button>
             </div>
+            
+            <a href="index.html" class="back-link">← Back to Home</a>
         </div>
 
         <div class="auth-info">
-            <h3>🔒 Two Ways to Connect</h3>
-            <p><strong>OAuth Login:</strong> Sign in with your Deriv username/password - no token needed</p>
-            <p><strong>API Token:</strong> Manual token entry for advanced users</p>
+            <h3>🔒 Three Ways to Access</h3>
+            <p><strong>🚀 Demo Mode:</strong> Instant access - no login needed</p>
+            <p><strong>🔐 OAuth Login:</strong> Sign in with Deriv username/password</p>
+            <p><strong>🔑 API Token:</strong> Manual token entry for advanced users</p>
             <p>✓ Direct connection to Deriv servers</p>
             <p>✓ We never store your credentials</p>
             <p>✓ 256-bit SSL encryption</p>
@@ -68,5 +201,38 @@
     <script src="https://unpkg.com/@deriv-com/auth-client@1.5.8/dist/index.umd.js"></script>
     <script src="config.js"></script>
     <script src="auth.js"></script>
+    
+    <script>
+        // Demo mode button handler
+        const demoBtn = document.getElementById('demoModeBtn');
+        if (demoBtn) {
+            demoBtn.addEventListener('click', () => {
+                // Set demo mode flag and redirect to dashboard
+                localStorage.setItem('demo_mode', 'true');
+                localStorage.setItem('demo_balance', '10000');
+                window.location.href = 'dashboard.html';
+            });
+        }
+        
+        // OAuth button handler
+        const oauthBtn = document.getElementById('oauthLoginBtn');
+        if (oauthBtn && typeof DerivAuth !== 'undefined') {
+            oauthBtn.addEventListener('click', async () => {
+                try {
+                    await DerivAuth.requestOidcAuthentication({
+                        redirectCallbackUri: `${window.location.origin}/callback.html`,
+                        clientId: 'YOUR_CLIENT_ID',  // Replace with your OAuth client ID
+                    });
+                } catch (error) {
+                    console.error('OAuth error:', error);
+                    alert('OAuth login failed: ' + error.message);
+                }
+            });
+        } else if (oauthBtn) {
+            oauthBtn.addEventListener('click', () => {
+                alert('OAuth setup: Register an OAuth app at developers.deriv.com and add your client ID to the code.');
+            });
+        }
+    </script>
 </body>
 </html>
